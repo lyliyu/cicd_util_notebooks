@@ -44,6 +44,7 @@ if [ -d ./{repo_name} ]; then
   rm -rf ./{repo_name}
 fi
 echo "git clone from {git_url}"
+git config --global http.sslVerify false
 git clone {git_url}
 cd {repo_name}
 echo "cd {repo_name}"
@@ -78,11 +79,12 @@ if [ -d ./{repo_name} ]; then
   rm -rf ./{repo_name}
 fi
 echo "git clone from {git_url}"
+git config --global http.sslVerify false
 git clone {git_url}
 cd {repo_name}
 echo "cd {repo_name}"
-echo "git checkout {git_hash}"
-git checkout {git_hash}
+echo "git checkout {git_hash} --"
+git checkout {git_hash} --
 echo "git pull"
 git pull
 echo "checkout {new_branch}"
@@ -142,6 +144,7 @@ def commit_and_push(repoName, branch, workDir, commitComments: str, userName, us
 set -e
 git config --global user.name "{userName}"
 git config --global user.email "{userEmail}"
+git config --global http.sslVerify false
 cd {workDir}/{repoName}
 echo "git add -A && git commit -m '{commitComments}'"
 git add -A && git commit -m "{commitComments}"
